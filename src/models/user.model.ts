@@ -1,6 +1,6 @@
 import { User } from '@prisma/client'
 import { prisma } from '../lib/prisma-client'
-import { CreateUserDTO, UpdateUserDTO } from '../TDO'
+import { CreateUserDTO, UpdateUserDTO } from '../TDO/user.tdo'
 
 /**
  * Criar User

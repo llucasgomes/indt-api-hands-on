@@ -67,20 +67,24 @@ export default async function userController(server: FastifyInstance) {
         description: 'Lista todos os usuários',
         tags: ['User'],
         response: {
-          200: z.array(
-            z.object({
-              id: z.string().uuid(),
-              name: z.string().min(5),
-              email: z.string().email(),
-              gender: z.string().min(1),
-              status: z.enum(['ACTIVE', 'INACTIVE']),
-              createdAt: z.date(),
-              updatedAt: z.date(),
-            }),
-          ),
-          500: z.object({
-            message: z.string(),
-          }),
+          200: z
+            .array(
+              z.object({
+                id: z.uuid(),
+                name: z.string().min(5),
+                email: z.email(),
+                gender: z.string().min(1),
+                status: z.enum(['ACTIVE', 'INACTIVE']),
+                createdAt: z.date(),
+                updatedAt: z.date(),
+              }),
+            )
+            .describe('Lista de usuários'),
+          500: z
+            .object({
+              message: z.string(),
+            })
+            .describe('Erro interno do servidor'),
         },
       },
     },
@@ -100,21 +104,27 @@ export default async function userController(server: FastifyInstance) {
           id: z.string().uuid('ID inválido'),
         }),
         response: {
-          200: z.object({
-            id: z.string().uuid(),
-            name: z.string().min(5),
-            email: z.string().email(),
-            gender: z.string().min(1),
-            status: z.enum(['ACTIVE', 'INACTIVE']),
-            createdAt: z.date(),
-            updatedAt: z.date(),
-          }),
-          404: z.object({
-            message: z.string(),
-          }),
-          500: z.object({
-            message: z.string(),
-          }),
+          200: z
+            .object({
+              id: z.string().uuid(),
+              name: z.string().min(5),
+              email: z.string().email(),
+              gender: z.string().min(1),
+              status: z.enum(['ACTIVE', 'INACTIVE']),
+              createdAt: z.date(),
+              updatedAt: z.date(),
+            })
+            .describe('Usuário encontrado'),
+          404: z
+            .object({
+              message: z.string(),
+            })
+            .describe('Usuário não encontrado'),
+          500: z
+            .object({
+              message: z.string(),
+            })
+            .describe('Erro interno do servidor'),
         },
       },
     },
@@ -141,18 +151,22 @@ export default async function userController(server: FastifyInstance) {
           status: z.enum(['ACTIVE', 'INACTIVE']).optional(),
         }),
         response: {
-          200: z.object({
-            id: z.string().uuid(),
-            name: z.string().min(5),
-            email: z.string().email(),
-            gender: z.string().min(1),
-            status: z.enum(['ACTIVE', 'INACTIVE']),
-            createdAt: z.date(),
-            updatedAt: z.date(),
-          }),
-          500: z.object({
-            message: z.string(),
-          }),
+          200: z
+            .object({
+              id: z.string().uuid(),
+              name: z.string().min(5),
+              email: z.string().email(),
+              gender: z.string().min(1),
+              status: z.enum(['ACTIVE', 'INACTIVE']),
+              createdAt: z.date(),
+              updatedAt: z.date(),
+            })
+            .describe('Usuário atualizado'),
+          500: z
+            .object({
+              message: z.string(),
+            })
+            .describe('Erro interno do servidor'),
         },
       },
     },
@@ -172,7 +186,7 @@ export default async function userController(server: FastifyInstance) {
           id: z.string().uuid('ID inválido'),
         }),
         response: {
-          204: z.null().describe('Nenhum conteúdo'),
+          204: z.null().describe('Deletado com sucesso.Nenhum conteúdo'),
           500: z
             .object({
               message: z.string(),

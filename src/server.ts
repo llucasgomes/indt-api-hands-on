@@ -8,6 +8,7 @@ import {
   validatorCompiler,
   type ZodTypeProvider,
 } from 'fastify-type-provider-zod'
+import pesquisadorRoutes from './routes/researcher.route'
 import userRoutes from './routes/user.route'
 
 //Instaciar o servidor
@@ -46,6 +47,7 @@ server.register(ScalarFastifyApiReference, {
 })
 
 server.register(userRoutes)
+server.register(pesquisadorRoutes)
 
 //configurações de porta
 server.listen(
