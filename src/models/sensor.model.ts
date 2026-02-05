@@ -6,15 +6,12 @@ export const createSensorModel = (data: any): Promise<Sensor> => {
 }
 
 export const getAllSensorsModel = (): Promise<Sensor[]> => {
-  return prisma.sensor.findMany({
-    include: { area: true },
-  })
+  return prisma.sensor.findMany()
 }
 
 export const getSensorByIdModel = (id: string): Promise<Sensor | null> => {
   return prisma.sensor.findUnique({
     where: { id },
-    include: { area: true },
   })
 }
 

@@ -12,15 +12,21 @@ export const createLeituraService = async (
   reply: FastifyReply,
 ) => {
   try {
-    const { dataHora } = req.body as { dataHora: Date }
-
-    if (dataHora > new Date()) {
-      return reply.status(400).send({
-        message: 'A dataHora da leitura não pode ser futura',
-      })
+    const { umidade, temperatura, sensor_id } = req.body as {
+      umidade: number
+      temperatura: number
+      sensor_id: string
     }
 
-    const leitura = await createLeituraModel(req.body)
+    const dataHora = new Date()
+
+    const leitura = await createLeituraModel({
+      umidade,
+      temperatura,
+      sensorId: sensor_id,
+      dataHora,
+    })
+
     return reply.status(201).send(leitura)
   } catch (error) {
     console.error(error)

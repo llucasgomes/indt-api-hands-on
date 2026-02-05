@@ -64,8 +64,6 @@ model Area {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-
-  sensores Sensor[]
 }
 
 model Sensor {
@@ -84,9 +82,6 @@ model Sensor {
   finalidade     String?
 
   areaId String
-  area   Area   @relation(fields: [areaId], references: [id])
-
-  leituras Leitura[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -99,7 +94,6 @@ model Leitura {
   dataHora    DateTime
 
   sensorId String
-  sensor   Sensor @relation(fields: [sensorId], references: [id])
 
   createdAt DateTime @default(now())
 }

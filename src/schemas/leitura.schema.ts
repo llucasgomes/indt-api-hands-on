@@ -11,16 +11,14 @@ export const LeituraSchema = z.object({
     .min(-50, 'Temperatura mínima é -50°C')
     .max(100, 'Temperatura máxima é 100°C'),
 
-  dataHora: z.date(),
-
-  sensorId: z.uuid('ID do sensor inválido'),
+  sensor_id: z.uuid('ID do sensor inválido'),
 })
 
 export const LeituraResponseSchema = z.object({
   id: z.uuid(),
   umidade: z.number().min(0).max(100),
   temperatura: z.number().min(-50).max(100),
-  dataHora: z.date(),
+  dataHora: z.coerce.date(),
   sensorId: z.uuid(),
-  createdAt: z.date(),
+  createdAt: z.coerce.date(),
 })

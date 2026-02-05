@@ -9,9 +9,6 @@ export const createLeituraModel = (data: any): Promise<Leitura> => {
 
 export const getAllLeiturasModel = (): Promise<Leitura[]> => {
   return prisma.leitura.findMany({
-    include: {
-      sensor: true,
-    },
     orderBy: {
       dataHora: 'desc',
     },
@@ -21,9 +18,6 @@ export const getAllLeiturasModel = (): Promise<Leitura[]> => {
 export const getLeituraByIdModel = (id: string): Promise<Leitura | null> => {
   return prisma.leitura.findUnique({
     where: { id },
-    include: {
-      sensor: true,
-    },
   })
 }
 
