@@ -23,8 +23,8 @@ export default async function pesquisadorController(server: FastifyInstance) {
           password: z.string().min(6),
           titulacao: z.string(),
           matricula: z.string(),
-          dataNascimento: z.date(),
-          especialidade: z.string().optional(),
+          dataNascimento: z.coerce.date(),
+          especialidade: z.string().min(1, 'Especialidade é obrigatória'),
           linhaPesquisa: z.string().optional(),
         }),
         response: {

@@ -20,27 +20,24 @@ export const criarPesquisadorSchema = z.object({
     message: 'Titulação inválida',
   }),
 
-  dataNascimento: z
-    .string()
-    .datetime()
-    .refine(
-      (data) => {
-        const nascimento = new Date(data)
-        const hoje = new Date()
+  dataNascimento: z.coerce.date().refine(
+    (data) => {
+      const nascimento = new Date(data)
+      const hoje = new Date()
 
-        let idade = hoje.getFullYear() - nascimento.getFullYear()
-        const m = hoje.getMonth() - nascimento.getMonth()
+      let idade = hoje.getFullYear() - nascimento.getFullYear()
+      const m = hoje.getMonth() - nascimento.getMonth()
 
-        if (m < 0 || (m === 0 && hoje.getDate() < nascimento.getDate())) {
-          idade--
-        }
+      if (m < 0 || (m === 0 && hoje.getDate() < nascimento.getDate())) {
+        idade--
+      }
 
-        return idade >= 18
-      },
-      {
-        message: 'Pesquisador deve ter no mínimo 18 anos',
-      },
-    ),
+      return idade >= 18
+    },
+    {
+      message: 'Pesquisador deve ter no mínimo 18 anos',
+    },
+  ),
 
   especialidade: z.string().optional(),
   linhaPesquisa: z.string().optional(),
